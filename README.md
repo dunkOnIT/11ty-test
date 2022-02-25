@@ -1,3 +1,7 @@
+Proof of concept `11ty` documentation website for `cubing.js`.
+
+# TODO
+
 ## Basics: 
 
 [x] Basic setup
@@ -10,10 +14,12 @@
 [ ] Creating a heading sidebar
     [ ] see if I can steal it from someone
     [ ] make it myself
-[ ] Edit CSS
+[x] Edit CSS
+[ ]
 
 ## Actually set the website up
-[ ] get images working
-[ ] homepage
+[x] get images working
+[x] homepage
 [ ] page layout
 [ ] check that pages work 
+[ ] reduce the absurd amount of css in bulma.css
