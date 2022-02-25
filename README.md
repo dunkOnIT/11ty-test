@@ -14,8 +14,8 @@ Proof of concept `11ty` documentation website for `cubing.js`.
 - [ ] Creating a heading sidebar
     - [ ] see if I can steal it from someone
     - [ ] make it myself
-- [x] Edit CSS
-- [ ]
+- [x] Get basic CSS looks going
+- [x] Create flexbox layout
 
 ## Actually set the website up
 - [x] get images working
