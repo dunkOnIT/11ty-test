@@ -14,7 +14,7 @@ Proof of concept `11ty` documentation website for `cubing.js`.
     - [x] get basic navbar generation with nunjucks working
     - [x] style the navbar
     - [x] add other navbar items
-- [ ] Creating a heading sidebar
+- [x] Creating a heading sidebar
     - [x] make a sketchy js script to add h2's
     - [x] get the thing to scroll with me
     - [x] add anchors
