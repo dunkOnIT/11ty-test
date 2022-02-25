@@ -1,1 +1,4 @@
+---
+title: Contributing
+---
 Placeholder page - contributing guide still to be built out. 

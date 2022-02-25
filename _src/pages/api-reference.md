@@ -1,3 +1,6 @@
+---
+title: API Reference
+---
 
 ## `cubing/alg`
 

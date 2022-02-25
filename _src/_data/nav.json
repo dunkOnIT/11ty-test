@@ -5,8 +5,20 @@
             "name":"Home"
         },
         {
+            "url":"/pages/getting-started",
+            "name":"Getting Started"
+        },
+        {
             "url":"/pages/api-reference",
             "name":"API Reference"
+        },
+        {
+            "url":"/pages/experiments",
+            "name":"Experiments"
+        },
+        {
+            "url":"/pages/contributing",
+            "name":"Contributing"
         }
     ]
 }

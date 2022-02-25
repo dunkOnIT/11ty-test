@@ -1,3 +1,6 @@
+---
+title: Getting Started
+---
   <script src="https://cdn.cubing.net/esm/cubing/twisty" type="module" defer></script>
   <script type="module" defer>
     import { experimentalSetShareAllNewRenderers } from "https://cdn.cubing.net/esm/cubing/twisty";
