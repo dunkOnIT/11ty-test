@@ -1,0 +1,250 @@
+<h2><code>cubing/alg</code></h2>
+<p>The most important classes in <code>cubing/alg</code> are <code>Alg</code> and <code>Move</code>.</p>
+<h3><code>Alg</code> Overview</h3>
+<h4>Class Definition</h4>
+<pre><code class="language-javascript">class Alg {
+  // Constructors
+  constructor(alg: Unit[] | Iterable&lt;Unit&gt;)
+  constructor(alg: string)
+
+  // String conversion
+  static fromString(s: string): Alg;
+  toString(): string;
+
+  // Comparison
+  isIdentical(other: Alg): boolean;
+
+  // Operations
+  invert(): Alg;
+  concat(input: Alg): Alg;
+  expand(options?: {
+    depth?: number;
+  }): Alg;
+  simplify(options?: {
+    collapseMoves?: boolean;
+    quantumMoveOrder?: (quantumMove: QuantumMove) =&gt; number;
+    depth?: number | null;
+  }): Alg;
+
+  // Contents
+  units(): Generator;
+  experimentalLeafMoves(): Generator&lt;Move&gt;;
+  experimentalIsEmpty(): boolean;
+  experimentalNumUnits(): number;
+}
+</code></pre>
+<h4>Methods</h4>
+<p>Alg objects are immutable. In order to modify and Alg, you can call its methods:</p>
+<ul>
+<li>alg.invert()</li>
+<li>alg.concat(alg2)</li>
+<li>alg.expand()</li>
+<li>alg.simplify()</li>
+</ul>
+<p>Refer to the code examples below for usage of these functions.</p>
+<pre><code class="language-javascript">import { Alg } from &quot;cubing/alg&quot;;
+
+const commutator = new Alg(&quot;[R, [U': L']]&quot;);
+commutator.expand()g().log(); 
+</code></pre>
+<p>Will result in the following:</p>
+<pre><code class="language-shell">Alg {} &quot;R U' L' U R' U' L U&quot;
+</code></pre>
+<pre><code class="language-javascript">import { Alg } from &quot;cubing/alg&quot;;
+const commutator = new Alg(&quot;[R, [U': L']]&quot;);
+
+const niklas = commutator.concat(&quot;U'&quot;);
+niklas.log();
+niklas.expand().log();
+niklas.expand().simplify().log();  
+</code></pre>
+<p>Will result in the following:</p>
+<pre><code class="language-shell"> Alg {} &quot;[R, [U': L']] U'&quot; 
+ Alg {} &quot;R U' L' U R' U' L U U'&quot; 
+ Alg {} &quot;R U' L' U R' U' L&quot; 
+</code></pre>
+<pre><code class="language-javascript">import { Alg } from &quot;cubing/alg&quot;;
+
+const sune = new Alg(&quot;[R U R2', [R: U]]&quot;);
+const antiSune = sune.invert();
+antiSune.log();
+antiSune.expand().log(); 
+</code></pre>
+<p>Will result in the following:</p>
+<pre><code class="language-shell"> Alg {} &quot;[[R: U], R U R2']&quot; 
+ Alg {} &quot;R U2 R' U' R U' R'&quot; 
+</code></pre>
+<pre><code class="language-javascript">import { Alg } from &quot;cubing/alg&quot;;
+const antiSune = new Alg(&quot;[[R: U], R U R2']&quot;);
+const niklas = new Alg(&quot;[R, [U': L']] U'&quot;);
+
+const jPerm = antiSune.concat(niklas);
+jPerm.log();
+jPerm.expand().log();
+jPerm.expand().simplify().log(); 
+</code></pre>
+<p>Will result in the following:</p>
+<pre><code class="language-shell"> Alg {} &quot;[[R: U], R U R2'] [R, [U': L']] U'&quot; 
+ Alg {} &quot;R U R' R U R2' R U' R' R2 U' R' R U' L' U R' U' L U U'&quot; 
+ Alg {} &quot;R U2 R' U' R U2' L' U R' U' L&quot; 
+</code></pre>
+<p>.expand() and .simplify() can also take options:</p>
+<pre><code class="language-javascript">import { Alg } from &quot;cubing/alg&quot;;
+
+const oll = new Alg(&quot;[F: [R, U]]]&quot;);
+oll.expand({depth: 1}).log();
+</code></pre>
+<p>Will result in the following:</p>
+<pre><code class="language-shell">Alg {} &quot;F [R, U] F'&quot;
+</code></pre>
+<h4>String Conversion</h4>
+<p>Parse an alg by passing it to the Alg constructor. You can call .toString() to get back a string representation.</p>
+<pre><code class="language-javascript">import { Alg } from &quot;cubing/alg&quot;
+
+const alg = new Alg(&quot;R U R' U R U2' R'&quot;);
+console.log(alg);
+console.log(alg.toString());
+</code></pre>
+<p>Will result in the following:</p>
+<pre><code class="language-shell"> Alg {} 
+ &quot;R U R' U R U2' R'&quot; 
+</code></pre>
+<p>As a convenience, you can use .log() to view an alg in a JavaScript console (e.g. node or DevTools). We'll use that for all the examples from now on:</p>
+<pre><code class="language-javascript">import { Alg } from &quot;cubing/alg&quot;
+
+new Alg(&quot;R U R' U R U2' R'&quot;).log();
+</code></pre>
+<p>Will result in the following:</p>
+<pre><code class="language-shell">Alg {} &quot;R U R' U R U2' R'&quot;
+</code></pre>
+<p>Note that this will result in a canonical string for the alg with whitespace collapsed.</p>
+<pre><code class="language-javascript">import { Alg } from &quot;cubing/alg&quot;
+
+const alg = new Alg(&quot; R   U R'   U R U2'   R'&quot;);
+alg.log();
+</code></pre>
+<p>Will result in the following:</p>
+<pre><code class="language-shell">Alg {} &quot;R U R' U R U2' R'&quot;
+</code></pre>
+<h4>General Usage Example</h4>
+<pre><code class="language-javascript">import { Alg } from &quot;cubing/alg&quot;;
+
+const sune = new Alg(&quot;[R U R2', [R: U]]&quot;);
+const antiSune = sune.invert();
+
+antiSune.log();
+antiSune.expand().log();
+antiSune.expand().simplify().log();
+</code></pre>
+<p>Will result in the following:</p>
+<pre><code class="language-shell">Alg{} &quot;[[R: U], R U R2']&quot; 
+Alg{} &quot;R U R' R U R2' R U' R' R2 U' R'&quot; 
+Alg{} &quot;R U2 R' U' R U' R'&quot; 
+</code></pre>
+<h3><code>Move</code> Overview</h3>
+<p>A Move is a <code>QuantumMove</code> (like <code>R</code> or <code>UL</code>) with an amount (any integer).</p>
+<h4><code>Move</code> Class</h4>
+<pre><code class="language-javascript">class Move {
+  // Constructors
+  constructor(s: string);
+  constructor(quantumMove: string, amount: number);
+  constructor(quantumMove: QuantumMove, amount?: number);
+
+  // String conversion
+  static fromString(s: string): Move;
+  toString(): string;
+
+  // Comparison
+  isIdentical(other: Comparable): boolean;
+  invert(): Move;
+
+  // Operations
+  modified(modifications: {
+    outerLayer?: number;
+    innerLayer?: number;
+    family?: string;
+    amount?: number;
+  }): Move;
+
+  // Contents
+  get quantum(): QuantumMove;
+  get amount(): number;
+  log(message?: string): Alg;
+}
+</code></pre>
+<h4><code>QuantumMove</code> Class</h4>
+<pre><code class="language-javascript">class QuantumMove {
+  // Constructors
+  constructor(family: string, innerLayer?: number | null, outerLayer?: number | null);
+
+  // String conversion
+  static fromString(s: string): QuantumMove;
+  toString(): string;
+
+  // Comparison
+  isIdentical(other: QuantumMove): boolean;
+
+  // Operations
+  modified(modifications: {
+    outerLayer?: number;
+    innerLayer?: number;
+    family?: string;
+  }): QuantumMove;
+
+  // Contents
+  get family(): string;
+  get outerLayer(): number | null;
+  get innerLayer(): number | null;
+}
+</code></pre>
+<h2><code>cubing/twisty</code></h2>
+<p>The most important class in <code>cubing/twisty</code> is <code>TwistyPlayer</code>.</p>
+<h3><code>Twisty</code> Overview</h3>
+<h4>Class Definition</h4>
+<pre><code class="language-javascript">class TwistyPlayer {
+  // Constructor
+  constructor(initialConfig?: {
+    // Note that any of the config options can be accessed
+    // or updated as properties on a TwistyPlayer instance directly.
+
+    alg?: Alg | string;
+    experimentalSetupAlg?: Alg | string;
+    experimentalSetupAnchor?: &quot;start&quot; | &quot;end&quot;;
+
+    puzzle?: PuzzleID;
+    visualization?: &quot;3D&quot; | &quot;2D&quot; | &quot;experimental-2D-LL&quot; | &quot;PG3D&quot;;
+    hintFacelets?: &quot;floating&quot; | &quot;none&quot;;
+    experimentalStickering?: ExperimentalStickering;
+
+    background?: BackgroundTheme;
+    controlPanel?: &quot;bottom-row&quot; | &quot;none&quot;;
+
+    backView?: BackViewLayout;
+    experimentalCameraLatitude?: Vector3;
+    experimentalCameraLongitude?: Vector3;
+    experimentalCameraLatitudeLimits?: &quot;auto&quot; | &quot;none&quot;;
+
+    viewerLink?: &quot;twizzle&quot; | &quot;none&quot;;
+  })
+
+  // Structure
+  timeline: Timeline;
+  cursor: AlgCursor | null;
+  viewerElems: TwistyViewerElement[];
+  controlElems: TwistyControlElement[];
+  fullscreen(): void;
+
+  // Twizzle
+  twizzleLink(): string;
+  visitTwizzleLink(): void;
+
+  // 3D code
+  scene: Twisty3DScene | null;
+  twisty3D: Twisty3DPuzzle | null;
+
+  // Experimental methods
+  experimentalSetStartStateOverride(state: Transformation | null): void;
+  experimentalSetCursorIndexer(cursorName: &quot;simple&quot; | &quot;tree&quot; | &quot;simultaneous&quot;): void;
+  experimentalAddMove(move: Move, coalesce?: boolean, coalesceDelayed?: boolean): void;
+} 
+</code></pre>
