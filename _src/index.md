@@ -1,3 +1,9 @@
+---
+title: cubing.js documentation
+layout: "base.njk"
+---
+
+
 <img src="../../assets/cubing.js.jpg" width="480">
 
 # `cubing.js`

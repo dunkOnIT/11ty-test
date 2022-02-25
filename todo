@@ -2,7 +2,7 @@
 
 [x] Basic setup
 [x] Check that 11ty works with js
-[ ] Deploy to gh pages 
+[x] Deploy to gh pages 
 
 ## Other: 
 
@@ -13,6 +13,7 @@
 [ ] Edit CSS
 
 ## Actually set the website up
+[ ] get images working
 [ ] homepage
 [ ] page layout
 [ ] check that pages work 
