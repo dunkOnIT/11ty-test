@@ -46,18 +46,23 @@ main {
 }
 
 .sidebar {
-    width: 300px;
+    position: fixed;
+    top: 10px;
+    min-width: 300px;
+    margin-top: 150px;
+    font-size: 18px;
 }
 
 .side-nav-container {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 15px;
 }
 
 
 .content {
+    margin-left: 300px;
     padding-left: 30px;
 
 }
@@ -134,7 +139,7 @@ pre {
   background-color: whitesmoke;
   color: #4a4a4a;
   font-size: 0.875em;
-  overflow-x: auto;
+  /* overflow-x: auto; */
   padding: 1.25rem 1.5rem;
   white-space: pre;
   word-wrap: normal;

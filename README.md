@@ -16,9 +16,8 @@ Proof of concept `11ty` documentation website for `cubing.js`.
     - [x] add other navbar items
 - [ ] Creating a heading sidebar
     - [x] make a sketchy js script to add h2's
-    - [ ] get the thing to scroll with me
-    - [ ] add h3's as children of h2's 
-    - [ ] add anchors
+    - [x] get the thing to scroll with me
+    - [x] add anchors
 
 - [x] Get basic CSS looks going
 - [x] Create flexbox layout
@@ -36,6 +35,9 @@ Proof of concept `11ty` documentation website for `cubing.js`.
 - [ ] Make code sections look less rubbish
 - [ ] Change px values to be reactive
 - [ ] Make width of content section uniform
+- [ ] sidebar overhaul
+    - [ ] add h3's as children of h2's 
+    - [ ] change position: fixed to sticky and troubleshoot
 
 ## Troubleshooting
 
