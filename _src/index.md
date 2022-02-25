@@ -6,7 +6,7 @@ layout: "base.njk"
 
 <img src="assets/cubing.js.jpg" width="480">
 
-# `cubing.js`
+# cubing.js
 
 ![make test](https://github.com/cubing/cubing.js/workflows/make%20test/badge.svg)  
 ![make build](https://github.com/cubing/cubing.js/workflows/make%20build/badge.svg)
