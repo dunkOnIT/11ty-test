@@ -1,5 +1,23 @@
 Proof of concept `11ty` documentation website for `cubing.js`.
 
+# Filemap
+
+## General
+
+- **_src**: "input" folder: what 11ty looks at to generate the website
+- **docs**: "output" folder: 11ty's auto-generated site files - we have no control over this
+- **.eleventy.js**: config file, defining input/output files and recognising `css` and `js` files
+- *other self-explanatory files*
+
+## `_src` contents
+
+- **_data**: defines variables used in nunjucks scripts - currently used for navbar component
+- **_includes**: page templates which influence how `.md` files are converted into `html` (which page template a `.md` file will use is specified in its front matter, or in the `pages.json` file which will set folder-level settings for a group of files)
+- **assets**: stores image files
+- **css**: stores `styles.css`, stylesheet for the website (importantly, defines the layout/positioning of elements in addition to just semantics)
+- **pages**: stores `.md` files for documentation pages (ie, primary documentation content)
+- **scripts**: stores `scripts.js`, which is used to generate the sidebar containing header anchors. There may be a way to do this with nunjucks, but I haven't figured it out yet
+
 # TODO
 
 ## Basics: 
