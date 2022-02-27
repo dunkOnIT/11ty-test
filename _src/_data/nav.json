@@ -1,23 +1,23 @@
 {
     "items": [
         {
-            "url":"/",
+            "url":"/11ty-test",
             "name":"Home"
         },
         {
-            "url":"/pages/getting-started",
+            "url":"/11ty-test/pages/getting-started",
             "name":"Getting Started"
         },
         {
-            "url":"/pages/api-reference",
+            "url":"/11ty-test/pages/api-reference",
             "name":"API Reference"
         },
         {
-            "url":"/pages/experiments",
+            "url":"/11ty-test/pages/experiments",
             "name":"Experiments"
         },
         {
-            "url":"/pages/contributing",
+            "url":"/11ty-test/pages/contributing",
             "name":"Contributing"
         }
     ]
