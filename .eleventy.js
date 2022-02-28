@@ -8,5 +8,6 @@ module.exports = function (eleventyConfig) {
       input: "_src",
       output: "docs",
     },
+    pathPrefix: "/11ty-test/"
   };
 };
