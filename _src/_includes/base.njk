@@ -9,25 +9,8 @@
     <script src="{{ '/scripts/scripts.js' | url }}" defer></script>
 </head>
 <body>
-    <header>
 
-        <div class="site-title"><a href="/">cubing.js documentation</a></div>
-        <nav class="top-nav">
-            <ul class="top-nav-container">
-                {% for item in nav.items %}
-                    <li>
-                        <a href="{{item.url}}"
-                            {% if item.url == page.url %} 
-                                aria-current="page" data-state="active"
-                            {% endif %}
-                        >{{item.name}}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </nav>
-    
-    </header>
-
+    {% include "header.njk" %}
 
     <main>
         <aside class="sidebar">

@@ -1,11 +1,11 @@
 {
     "items": [
         {
-            "url":"{{ '/' | url }}",
+            "url":"/11ty-test",
             "name":"Home"
         },
         {
-            "url":"{{ '/pages/getting-started' | url }}",
+            "url":"/11ty-test/pages/getting-started",
             "name":"Getting Started"
         },
         {
